@@ -5,6 +5,20 @@ const getIaRandomChoice = () => {
     return iaChoice;
 }
 
+const getUserChoice = () => {
+    let userAvailableChoices = ['Rock', 'Paper', 'Scissors']; 
+    let userChoice = '';
+    while (true) {
+        userChoice = prompt('Enter a choice (Paper, Rock, Scissors) : ');
+        if (userAvailableChoices.includes(userChoice)) {
+            break;
+        } else {
+            console.log('Please enter a valid choice !');
+        }
+    }
+    return userChoice;
+}
+
 const isUserWin = (userChoice, iaChoice) => {
     let wins = ['Rock Scissors', 'Paper Rock', 'Scissors Paper'];
     let result = `${userChoice} ${iaChoice}`;
@@ -19,8 +33,7 @@ const isUserWin = (userChoice, iaChoice) => {
 }
 
 const main = () => {
-    let userChoice = prompt('Enter a choice (Paper, Rock, Scissors) : ');
-    isUserWin(userChoice, getIaRandomChoice());
+    isUserWin(getUserChoice(), getIaRandomChoice());
 }
 
 main();
