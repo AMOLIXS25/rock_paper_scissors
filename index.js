@@ -5,4 +5,4 @@ const getIaRandomChoice = () => {
     return randomChoicesOfIa;
 }
 
-console.log(getIaRandomChoice());
+let userChoice = parseInt(prompt('Enter a choice (Rock, Paper, Scissors) : '));
