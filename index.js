@@ -1,8 +1,26 @@
 const getIaRandomChoice = () => {
     const numberOfChoices = 3;
-    let iaChoices = ['Rock', 'Paper', 'Scissors'];
-    let randomChoicesOfIa = iaChoices[Math.floor(Math.random() * numberOfChoices)];
-    return randomChoicesOfIa;
+    let iaAvailableChoices = ['Rock', 'Paper', 'Scissors'];
+    let iaChoice = iaAvailableChoices[Math.floor(Math.random() * numberOfChoices)];
+    return iaChoice;
 }
 
-let userChoice = parseInt(prompt('Enter a choice (Rock, Paper, Scissors) : '));
+const isUserWin = (userChoice, iaChoice) => {
+    let wins = ['Rock Scissors', 'Paper Rock', 'Scissors Paper'];
+    let result = `${userChoice} ${iaChoice}`;
+    console.log(result);
+    if (wins.includes(result)) {
+        console.log('Win !');
+    } else if (userChoice == iaChoice) {
+        console.log('Equality !');
+    } else {
+        console.log('Game over !');
+    }
+}
+
+const main = () => {
+    let userChoice = prompt('Enter a choice (Paper, Rock, Scissors) : ');
+    isUserWin(userChoice, getIaRandomChoice());
+}
+
+main();
