@@ -25,15 +25,31 @@ const isUserWin = (userChoice, iaChoice) => {
     console.log(result);
     if (wins.includes(result)) {
         console.log('Win !');
+        return 1;
     } else if (userChoice == iaChoice) {
         console.log('Equality !');
+        return 2;
     } else {
         console.log('Game over !');
+        return 0;
     }
 }
 
 const main = () => {
-    isUserWin(getUserChoice(), getIaRandomChoice());
+    let iaScore = 0;
+    let playerScore = 0;
+    let userNumberOfRoundPlayChoice = parseInt(prompt('Enter the number of round you want to play : '));
+    for (let i = 0; i < userNumberOfRoundPlayChoice; i++) {
+        let roundResult = isUserWin(getUserChoice(), getIaRandomChoice());
+        if (roundResult == 1) {
+            playerScore++;
+        } else if (roundResult == 0) {
+            iaScore++;
+        }
+    }
+    console.log('The game is finish score : ');
+    console.log(`Player : ${playerScore}`);
+    console.log(`IA : ${iaScore}`);
 }
 
 main();
