@@ -24,3 +24,55 @@ header h1 {
     text-align: center;
     text-shadow: 2px 2px 0px #a98bfa61;
 }
+
+/*
+======= MAIN
+*/
+
+main {
+    text-align: center;
+}
+
+main h3 {
+    color: #fff;
+    font-size: 2em;
+}
+
+main .card-container {
+    display: flex;
+    gap: 10em;
+    align-items: center;
+    justify-content: center;
+}
+
+main .card-container .card {
+    background-color: #a88bfa;
+    font-size: 5em;
+    width: 2em;
+    height: 2em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 20px;
+    box-shadow:  0 6px #a98bfa5e;
+    position: relative;
+    transition: 0.5s box-shadow;
+    transition: 0.5s top;
+    transition: 0.5s transform;
+}
+
+.card::selection { /* Code for Firefox */
+    color: none;
+    background: none;
+}
+
+main .card-container .card:hover {
+    box-shadow: 0 4px #a98bfa5e;
+    top: 2px;
+    transform: scale(1.03);
+}
+
+main .card-container .card:active {
+    box-shadow: 0 0 #a98bfa5e;
+    top: 6px;
+}
