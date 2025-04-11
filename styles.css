@@ -76,3 +76,41 @@ main .card-container .card:active {
     box-shadow: 0 0 #a98bfa5e;
     top: 6px;
 }
+
+/*
+======= RESULT ROUND CONTAINER =======
+*/
+
+.result-round-container {
+    color: #fff;
+    background-color: #272727;
+    padding: 1em 0;
+    width: 50%;
+    margin: 5em auto;
+    border-radius: 1em;
+    box-shadow: 6px 6px #27272762;
+}
+
+.result-round-container .result-round-text-container p:first-child {
+    font-size: 1.2em;
+}
+
+.result-round-container .result-round-text-container p:last-child {
+    font-size: 1em;
+}
+
+.result-round-container .player-computer-container {
+    display: flex;
+    justify-content: center;
+    gap: 15em;
+}
+
+.result-round-container .player-computer-container .player-score, .result-round-container .player-computer-container .computer-score {
+    font-size: 1.3em;
+    font-weight: bold;
+}
+
+.result-round-container .player-computer-container .player-choice, .result-round-container .player-computer-container .computer-choice {
+    font-size: 2em;
+}
+
