@@ -38,8 +38,7 @@ const isUserWin = (userChoice, iaChoice) => {
 const main = () => {
     let iaScore = 0;
     let playerScore = 0;
-    let userNumberOfRoundPlayChoice = parseInt(prompt('Enter the number of round you want to play : '));
-    for (let i = 0; i < userNumberOfRoundPlayChoice; i++) {
+    for (let i = 0; i < 5; i++) {
         let roundResult = isUserWin(getUserChoice(), getIaRandomChoice());
         if (roundResult == 1) {
             playerScore++;
