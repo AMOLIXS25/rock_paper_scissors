@@ -1,54 +1,103 @@
-const getIaRandomChoice = () => {
-    const numberOfChoices = 3;
-    let iaAvailableChoices = ['Rock', 'Paper', 'Scissors'];
-    let iaChoice = iaAvailableChoices[Math.floor(Math.random() * numberOfChoices)];
-    return iaChoice;
+let playerScore = 0;
+let computerScore = 0;
+
+
+const playRound = (userChoice, computerChoice) => {
+    const resultRound = `${userChoice} ${computerChoice}`;
+    const { resultRoundTextOne, resultRoundTextTwo } = resultRoundManager(
+        userChoice, computerChoice, resultRound
+    );
+    updateChoices(userChoice, computerChoice);
+    updateResultRoundText(resultRoundTextOne, resultRoundTextTwo);
+    updateScore(playerScore, computerScore);
 }
 
-const getUserChoice = () => {
-    let userAvailableChoices = ['Rock', 'Paper', 'Scissors']; 
-    let userChoice = '';
-    while (true) {
-        userChoice = prompt('Enter a choice (Paper, Rock, Scissors) : ');
-        if (userAvailableChoices.includes(userChoice)) {
-            break;
-        } else {
-            console.log('Please enter a valid choice !');
-        }
-    }
-    return userChoice;
-}
 
-const isUserWin = (userChoice, iaChoice) => {
-    let wins = ['Rock Scissors', 'Paper Rock', 'Scissors Paper'];
-    let result = `${userChoice} ${iaChoice}`;
-    console.log(result);
-    if (wins.includes(result)) {
-        console.log('Win !');
-        return 1;
-    } else if (userChoice == iaChoice) {
-        console.log('Equality !');
-        return 2;
+const resultRoundManager = (userChoice, computerChoice, resultRound) => {
+    const userWins = ['rock scissors', 'paper rock', 'scissors paper'];
+    const computerWins = ['rock paper', 'paper scissors', 'scissors rock'];
+    let resultRoundTextOne = '';
+    let resultRoundTextTwo = '';
+    if (userWins.includes(resultRound)) {
+        resultRoundTextOne = 'You won !';
+        resultRoundTextTwo = `${userChoice} beats ${computerChoice}`;
+        playerScore++;
+    } else if (computerWins.includes(resultRound)) {
+        resultRoundTextOne = 'You lost !';
+        resultRoundTextTwo = `${userChoice} is beaten by ${computerChoice}`;
+        computerScore++;
     } else {
-        console.log('Game over !');
-        return 0;
+        resultRoundTextOne = 'It\'s a tie !';
+        resultRoundTextTwo = `${userChoice} ties with ${computerChoice}`;
+    }
+    return { resultRoundTextOne, resultRoundTextTwo };
+}
+
+const verifIfScoreIsFive = (pScore, cScore) => {
+    if (pScore === 5) {
+        window.location.reload(true);
+        alert('You win...');
+    } else if (cScore === 5) {
+        window.location.reload(true);
+        alert('You lost...');
     }
 }
+
+const updateChoices = (userChoice, computerChoice) => {
+    const playerChoiceParagraph = document.querySelector('.player-choice');
+    const computerChoiceParagraph = document.querySelector('.computer-choice');
+    playerChoiceParagraph.textContent = getEmojiFromChoice(userChoice);
+    computerChoiceParagraph.textContent = getEmojiFromChoice(computerChoice);
+}
+
+
+const getEmojiFromChoice = (choice) => {
+    if (choice === 'rock') {
+        return '🗿';
+    } else if (choice === 'paper') {
+        return '📃';
+    } else {
+        return '✂️';
+    }
+}
+
+
+const updateResultRoundText = (resultRoundTextOne, resultRoundTextTwo) => {
+    const resultRoundParagraphOne = document.querySelector('.result-round-text-container p:first-child');
+    const resultRoundParagraphTwo = document.querySelector('.result-round-text-container p:last-child');
+    resultRoundParagraphOne.textContent = resultRoundTextOne;
+    resultRoundParagraphTwo.textContent = resultRoundTextTwo;
+}
+
+
+const updateScore = (playerScore, computerScore) => {
+    const computerScoreParagraph = document.querySelector('.computer-score');
+    computerScoreParagraph.textContent = `Computer : ${computerScore}`;  
+    const playerScoreParagraph = document.querySelector('.player-score');
+    playerScoreParagraph.textContent = `Player: ${playerScore}`;
+    verifIfScoreIsFive(playerScore, computerScore);
+}
+
 
 const main = () => {
-    let iaScore = 0;
-    let playerScore = 0;
-    for (let i = 0; i < 5; i++) {
-        let roundResult = isUserWin(getUserChoice(), getIaRandomChoice());
-        if (roundResult == 1) {
-            playerScore++;
-        } else if (roundResult == 0) {
-            iaScore++;
-        }
-    }
-    console.log('The game is finish score : ');
-    console.log(`Player : ${playerScore}`);
-    console.log(`IA : ${iaScore}`);
+    initializeListenersToPlayARound();
+}
+
+
+const initializeListenersToPlayARound = () => {
+    const rockPaperScissorsCards = document.querySelectorAll('.card');
+    rockPaperScissorsCards.forEach((card) => {
+        card.addEventListener('click', (event) => {
+            const userChoice = event.target.className.split(' ')[1];
+            playRound(userChoice, getComputerChoice());
+        });
+    });
+}
+
+
+const getComputerChoice = () => {
+    const availableComputerChoice = ['rock', 'paper', 'scissors'];
+    return availableComputerChoice[Math.floor(Math.random() * availableComputerChoice.length)]; 
 }
 
 main();
